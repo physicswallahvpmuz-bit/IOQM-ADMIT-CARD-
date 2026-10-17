@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>IOQM Admit Card Verification</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      background: #eef2ff;
+    }
+
+    .container {
+      max-width: 420px;
+      margin: 45px auto;
+      padding: 28px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 5px 25px #0002;
+    }
+
+    h2 {
+      text-align: center;
+      color: #243b80;
+    }
+
+    p {
+      text-align: center;
+      color: #555;
+    }
+
+    label {
+      display: block;
+      margin-top: 16px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-top: 7px;
+      border: 1px solid #bbb;
+      border-radius: 7px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 13px;
+      margin-top: 22px;
+      background: #243b80;
+      color: white;
+      border: none;
+      border-radius: 7px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #message {
+      text-align: center;
+      margin-top: 18px;
+      overflow-wrap: anywhere;
+    }
+
+    .note {
+      font-size: 12px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h2>IOQM 2026</h2>
+
+    <p>Candidate Verification Portal</p>
+
+    <form id="verificationForm">
+
+      <label for="candidateName">Candidate Name</label>
+      <input
+        id="candidateName"
+        type="text"
+        placeholder="Enter candidate name"
+        autocomplete="off"
+        required
+      >
+
+      <label for="registrationNumber">
+        Registration Number
+      </label>
+      <input
+        id="registrationNumber"
+        type="text"
+        placeholder="Enter registration number"
+        autocomplete="off"
+        required
+      >
+
+      <label for="dob">Date of Birth</label>
+      <input
+        id="dob"
+        type="text"
+        placeholder="DD-MM-YYYY"
+        autocomplete="off"
+        required
+      >
+
+      <button type="submit">
+        Verify & Open PDF
+      </button>
+
+    </form>
+
+    <div id="message" role="status"></div>
+
+    <p class="note">
+      Enter the details associated with your admit card.
+    </p>
+
+  </div>
+
+  <script>
+    const candidate = {
+      name: "Umang Preetam",
+      registrationNumber: "22715372",
+      dob: "21-04-2010"
+    };
+
+    document
+      .getElementById("verificationForm")
+      .addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        const name = document
+          .getElementById("candidateName")
+          .value.trim()
+          .toLowerCase();
+
+        const registrationNumber = document
+          .getElementById("registrationNumber")
+          .value.trim();
+
+        const dob = document
+          .getElementById("dob")
+          .value.trim();
+
+        const message = document.getElementById("message");
+
+        if (
+          name === candidate.name.toLowerCase() &&
+          registrationNumber === candidate.registrationNumber &&
+          dob === candidate.dob
+        ) {
+          message.textContent = "Details matched. Opening PDF...";
+
+          // PDF must be uploaded in the same GitHub repository.
+          window.location.href = "./IOQM%20ADMIT%20CARD.pdf";
+
+        } else {
+          message.textContent =
+            "Details do not match. Please check your information.";
+
+          message.style.color = "red";
+        }
+      });
+  </script>
+
+</body>
+  </html>
